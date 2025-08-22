@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DevOps Login</title>
+    <style>
+      body {
+        font-family: Arial;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      #login-box {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+      }
+      input {
+        width: 100%;
+        padding: 6px;
+        margin: 6px 0;
+      }
+      button {
+        width: 100%;
+        padding: 8px;
+      }
+      #error {
+        color: red;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="login-box">
+      <h3>Login</h3>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="login()">Login</button>
+      <div id="error"></div>
+    </div>
+
+    <script>
+      async function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const errorDiv = document.getElementById("error");
+
+        try {
+          // const res = await fetch("http://localhost:3000/api/login", {
+          //   method: "POST",
+          //   headers: { "Content-Type": "application/json" },
+          //   body: JSON.stringify({ username, password }),
+          // });
+          const res = await fetch(
+            "http://code-backend.backend.svc.cluster.local:3000/api/login",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username, password }),
+            }
+          );
+          const data = await res.json();
+          if (data.success) {
+            document.body.innerHTML =
+              '<h1 style="text-align:center; margin-top:40vh;">welcome</h1>';
+          } else {
+            errorDiv.innerText = data.message;
+          }
+        } catch (err) {
+          errorDiv.innerText = "Error connecting to server";
+        }
+      }
+    </script>
+  </body>
+</html>
