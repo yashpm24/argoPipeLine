@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: html-app
-          image: asia-south1-docker.pkg.dev/proj1-469810/web-repo/webpage:v1
+          image: asia-south1-docker.pkg.dev/demoargo/argrepo/testargo1:v1
           ports:
             - containerPort: 80

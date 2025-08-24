@@ -5,14 +5,13 @@ steps:
       [
         "build",
         "-t",
-        "asia-south1-docker.pkg.dev/proj1-469810/web-repo/webpage:v1",
+        "asia-south1-docker.pkg.dev/demoargo/argrepo/testargo1:v1",
         ".",
       ]
 
   # Push image to Artifact Registry
   - name: "gcr.io/cloud-builders/docker"
-    args:
-      ["push", "asia-south1-docker.pkg.dev/proj1-469810/web-repo/webpage:v1"]
+    args: ["push", "asia-south1-docker.pkg.dev/demoargo/argrepo/testargo1:v1"]
 
 images:
-  - "asia-south1-docker.pkg.dev/proj1-469810/web-repo/webpage:v1"
+  - "asia-south1-docker.pkg.dev/demoargo/argrepo/testargo1:v1"
