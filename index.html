@@ -1,78 +1,345 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>DevOps Login</title>
+    <title>Space Landing Page</title>
     <style>
       body {
-        font-family: Arial;
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        color: #fff;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        margin: 0;
+        background: url("https://images.unsplash.com/photo-1475694867812-f82b8696d610?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80")
+          no-repeat center center/cover;
+        position: relative;
+        overflow: hidden;
       }
-      #login-box {
-        border: 1px solid #ccc;
+
+      /* Overlay for readability */
+      body::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 40, 0.6);
+        z-index: 0;
+      }
+
+      .content {
+        text-align: center;
+        z-index: 1;
+        max-width: 800px;
         padding: 20px;
-        border-radius: 8px;
-        width: 300px;
+        animation: fadeIn 2s ease-in-out;
       }
-      input {
-        width: 100%;
-        padding: 6px;
-        margin: 6px 0;
+
+      h1 {
+        font-size: 4em;
+        margin: 0;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        background: linear-gradient(90deg, #ffcc70, #ff758c, #c850c0, #4158d0);
+        background-clip: text; /* Standard */
+        -webkit-background-clip: text; /* Chrome/Safari */
+        color: transparent; /* Fallback */
+        -webkit-text-fill-color: transparent; /* Chrome/Safari */
+        /* text-fill-color: transparent;   Standard (not widely supported yet) */
+        animation: glow 3s infinite alternate;
       }
-      button {
-        width: 100%;
-        padding: 8px;
+
+      p {
+        font-size: 1.3em;
+        margin-top: 20px;
+        line-height: 1.6;
+        color: #ddd;
       }
-      #error {
-        color: red;
-        margin-top: 10px;
+
+      .btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 12px 25px;
+        border: 2px solid #fff;
+        border-radius: 25px;
+        color: #fff;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background: #fff;
+        color: #000;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #ffcc70, 0 0 20px #ff758c;
+        }
+        to {
+          text-shadow: 0 0 20px #4158d0, 0 0 40px #c850c0;
+        }
+      }
+
+      /* Shooting stars */
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 100px;
+        background: linear-gradient(white, transparent);
+        opacity: 0.7;
+        animation: shooting 4s linear infinite;
+      }
+
+      @keyframes shooting {
+        0% {
+          transform: translate(0, -200px) rotate(45deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate(800px, 600px) rotate(45deg);
+          opacity: 0;
+        }
       }
     </style>
   </head>
   <body>
-    <div id="login-box">
-      <h3>Login</h3>
-      <input type="text" id="username" placeholder="Enter username" />
-      <input type="password" id="password" placeholder="Password" />
-      <button onclick="login()">Login</button>
-      <div id="error"></div>
+    <div class="content">
+      <h1>Explore the Cosmos</h1>
+      <p>
+        Journey beyond the stars and discover the mysteries of galaxies,
+        nebulae, and worlds unknown. Space is vast, beautiful, and waiting for
+        you to explore.
+      </p>
+      <a href="#" class="btn">Begin the Journey</a>
     </div>
 
-    <script>
-      async function login() {
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-        const errorDiv = document.getElementById("error");
+    <div class="star" style="top: 10%; left: 20%; animation-delay: 0s"></div>
+    <div class="star" style="top: 30%; left: 60%; animation-delay: 2s"></div>
+    <div class="star" style="top: 50%; left: 10%; animation-delay: 4s"></div>
+  </body>
+</html> -->
 
-        try {
-          // const res = await fetch("http://localhost:3000/api/login", {
-          //   method: "POST",
-          //   headers: { "Content-Type": "application/json" },
-          //   body: JSON.stringify({ username, password }),
-          // });
-          const res = await fetch(
-            "http://code-backend.backend.svc.cluster.local:3000/api/login",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ username, password }),
-            }
-          );
-          const data = await res.json();
-          if (data.success) {
-            document.body.innerHTML =
-              '<h1 style="text-align:center; margin-top:40vh;">welcome</h1>';
-          } else {
-            errorDiv.innerText = data.message;
-          }
-        } catch (err) {
-          errorDiv.innerText = "Error connecting to server";
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Space Landing Page</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: #000;
+        color: #fff;
+        line-height: 1.6;
+      }
+
+      header {
+        height: 100vh;
+        background: url("https://images.unsplash.com/photo-1475694867812-f82b8696d610?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80")
+          no-repeat center center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+      }
+
+      header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 30, 0.6);
+      }
+
+      header .content {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        padding: 20px;
+      }
+
+      header h1 {
+        font-size: 4em;
+        background: linear-gradient(90deg, #ffcc70, #ff758c, #c850c0, #4158d0);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        animation: glow 3s infinite alternate;
+        margin-bottom: 20px;
+      }
+
+      header p {
+        font-size: 1.3em;
+        color: #ddd;
+      }
+
+      section {
+        padding: 80px 10%;
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+
+      section:nth-child(even) {
+        flex-direction: row-reverse;
+        background: #0a0a1a;
+      }
+
+      section img {
+        width: 45%;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        transition: transform 0.4s ease;
+      }
+
+      section img:hover {
+        transform: scale(1.05);
+      }
+
+      section .text {
+        width: 55%;
+      }
+
+      section h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #ffcc70;
+      }
+
+      section p {
+        font-size: 1.1em;
+        color: #ccc;
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px;
+        background: #111;
+        color: #aaa;
+        font-size: 0.9em;
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #ffcc70, 0 0 20px #ff758c;
+        }
+        to {
+          text-shadow: 0 0 20px #4158d0, 0 0 40px #c850c0;
         }
       }
-    </script>
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <header>
+      <div class="content">
+        <h1>Explore the Cosmos</h1>
+        <p>
+          Journey through the Milky Way, the Sun, the Stars, and the Moon.
+          Discover the beauty and mysteries of our universe.
+        </p>
+      </div>
+    </header>
+
+    <!-- Milky Way -->
+    <section>
+      <img
+        src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
+        alt="Milky Way Galaxy"
+      />
+      <div class="text">
+        <h2>The Milky Way</h2>
+        <p>
+          Our home galaxy is a vast spiral of stars, dust, and dark matter. It
+          contains over 100 billion stars, with our Solar System tucked away in
+          one of its spiral arms. On a clear night, the Milky Way can be seen as
+          a glowing band stretching across the sky.
+        </p>
+      </div>
+    </section>
+
+    <!-- Sun -->
+    <section>
+      <img
+        src="https://solarsystem.nasa.gov/system/stellar_items/image_files/4_sun_480x320.jpg"
+        alt="The Sun"
+      />
+      <div class="text">
+        <h2>The Sun</h2>
+        <p>
+          The Sun is the heart of our Solar System, a massive ball of glowing
+          plasma. It provides the heat and light necessary for life on Earth.
+          Its energy comes from nuclear fusion at its core, where hydrogen atoms
+          fuse into helium, releasing immense amounts of energy.
+        </p>
+      </div>
+    </section>
+
+    <!-- Stars -->
+    <section>
+      <img
+        src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
+        alt="Stars in the night sky"
+      />
+      <div class="text">
+        <h2>Stars</h2>
+        <p>
+          Stars are the building blocks of galaxies. They come in many sizes,
+          colors, and ages. From tiny red dwarfs to massive blue giants, stars
+          shape the universe with their light and energy. Some end their lives
+          as spectacular supernovae, creating the elements that make up planets
+          and even life.
+        </p>
+      </div>
+    </section>
+
+    <!-- Moon -->
+    <section>
+      <img
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
+        alt="The Moon"
+      />
+      <div class="text">
+        <h2>The Moon</h2>
+        <p>
+          Earth's only natural satellite, the Moon influences our tides and has
+          been a source of wonder for millennia. Its surface is covered with
+          craters and plains, remnants of ancient impacts. In 1969, humans first
+          set foot on its surface, marking a new chapter in space exploration.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      © 2025 Space Explorer. All rights reserved. | Images from Unsplash & NASA
+    </footer>
   </body>
 </html>
