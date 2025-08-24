@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
         - name: html-app
-          image: asia-south1-docker.pkg.dev/demoargo/argrepo/testargo1:v1
+          image: asia-south1-docker.pkg.dev/demoargo/argrepo/testargo1:latest
+          imageoPullPolicy: Always # ensures every new push gets pulled
           ports:
             - containerPort: 80
